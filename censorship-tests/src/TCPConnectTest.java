@@ -39,13 +39,16 @@ public class TCPConnectTest {
 						serverN = serverN.replaceAll("ftp://", "");
 						serverN = serverN.replaceAll("ftps://", "");
 						serverN = serverN.replaceAll("/", "");
-				    	
-				    	String result;
-				    	try{
-				    		testConnection(serverN);
-				    		result = "Success";
-				    	}catch(Exception e){
-				    		result = e.getClass().getSimpleName();
+						
+				    	String result = "Error";
+				    	int trys = 3;
+				    	while (trys-- >= 0 && !("Success".equals(result))){
+					    	try{
+					    		testConnection(serverN);
+					    		result = "Success";
+					    	}catch(Exception e){
+					    		result = e.getClass().getSimpleName();
+					    	}
 				    	}
 				    	
 				    	System.out.println(serverN + "," + 80 + "," + result);
