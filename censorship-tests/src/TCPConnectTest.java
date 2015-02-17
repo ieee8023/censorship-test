@@ -49,6 +49,12 @@ public class TCPConnectTest {
 					    		result = "Success";
 					    	}catch(Exception e){
 					    		result = e.getClass().getSimpleName();
+					    		try {
+					    			//Sleep for a moment before trying again
+									Thread.sleep(5000);
+								} catch (InterruptedException e1) {
+									e1.printStackTrace();
+								}
 					    	}
 				    	}
 				    	
