@@ -22,6 +22,7 @@ public class TCPConnectTest {
 		}
 		
 		int cores = Runtime.getRuntime().availableProcessors()-1;
+		cores = 500;
 		ThreadPoolExecutor es = (ThreadPoolExecutor) Executors.newFixedThreadPool(cores);
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(inputfile))) {
