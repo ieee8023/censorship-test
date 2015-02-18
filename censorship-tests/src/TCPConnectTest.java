@@ -14,11 +14,12 @@ public class TCPConnectTest {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
 		String inputfile;
+		String defaultinput = "outsideresults";
 		try{
 			inputfile = args[0];
 		}catch(Exception e){
-			System.out.println("Defaulting to input file alexa-top-1m.txt");
-			inputfile = "alexa-top-1m.txt";
+			System.out.println("Defaulting to input file " + defaultinput);
+			inputfile = defaultinput;
 		}
 		
 		int cores = Runtime.getRuntime().availableProcessors()-1;
@@ -28,18 +29,23 @@ public class TCPConnectTest {
 		try(BufferedReader br = new BufferedReader(new FileReader(inputfile))) {
 		    for(String line; (line = br.readLine()) != null; ) {
 		        
-		    	final String server = line;
+		    	final String linef = line;
 		    	Runnable run = (new Runnable() {
 					
 					@Override
 					public void run() {
 						
-						String serverN = server;
+						
+						String serverN = linef;
+						
+						serverN = serverN.substring(0, serverN.indexOf(','));
 						serverN = serverN.replaceAll("http://", "");
 						serverN = serverN.replaceAll("https://", "");
 						serverN = serverN.replaceAll("ftp://", "");
 						serverN = serverN.replaceAll("ftps://", "");
 						serverN = serverN.replaceAll("/", "");
+						serverN = serverN.trim();
+						serverN = serverN.toLowerCase();
 						
 				    	String result = "Error";
 				    	int trys = 3;
