@@ -22,10 +22,13 @@ public class TCPConnectTest {
 			inputfile = defaultinput;
 		}
 		
+		
+		System.setProperty("http.agent", "");
+		
 		int cores = Runtime.getRuntime().availableProcessors()-1;
 		cores = 2000;
 		ThreadPoolExecutor es = (ThreadPoolExecutor) Executors.newFixedThreadPool(cores);
-		
+		final String block = "forblocking";
 		try(BufferedReader br = new BufferedReader(new FileReader(inputfile))) {
 		    for(String line; (line = br.readLine()) != null; ) {
 		        
@@ -50,25 +53,24 @@ public class TCPConnectTest {
 						serverN = serverN.toLowerCase();
 						
 				    	String result = "Error";
-				    	//int trys = 0;
-				    	//while (trys-- >= 0 && !("Success".equals(result))){
+				    	int trys = 4;
+				    	while (trys-- >= 0 && !("Success".equals(result))){
 					    	try{
 					    		testConnection(serverN);
 					    		result = "Success";
 					    	}catch(Exception e){
 					    		result = e.getClass().getSimpleName();
-//					    		try {
-//					    			//Sleep for a moment before trying again
-//									Thread.sleep(5000);
-//								} catch (InterruptedException e1) {
-//									e1.printStackTrace();
-//								}
+					    		try {
+					    			//Sleep for a moment before trying again
+									Thread.sleep(5000);
+								} catch (InterruptedException e1) {
+									e1.printStackTrace();
+								}
 					    	}
-				    	//}
+				    	}
 				    	
-				    	System.out.println(serverN + "," + 80 + "," + result);
-				    	
-		    	
+
+					    	System.out.println(serverN + "," + 80 + "," + result);
 					}
 				});
 		    	
@@ -98,7 +100,8 @@ public class TCPConnectTest {
 		
 		URL u = new URL("http://" + server);
 		URLConnection c = u.openConnection();
-		
+		c.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+		c.setConnectTimeout(5000);
 		c.connect();
 		
 		//System.out.println(c.getContentLength());
