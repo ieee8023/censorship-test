@@ -50,21 +50,21 @@ public class TCPConnectTest {
 						serverN = serverN.toLowerCase();
 						
 				    	String result = "Error";
-				    	int trys = 3;
-				    	while (trys-- >= 0 && !("Success".equals(result))){
+				    	//int trys = 0;
+				    	//while (trys-- >= 0 && !("Success".equals(result))){
 					    	try{
 					    		testConnection(serverN);
 					    		result = "Success";
 					    	}catch(Exception e){
 					    		result = e.getClass().getSimpleName();
-					    		try {
-					    			//Sleep for a moment before trying again
-									Thread.sleep(5000);
-								} catch (InterruptedException e1) {
-									e1.printStackTrace();
-								}
+//					    		try {
+//					    			//Sleep for a moment before trying again
+//									Thread.sleep(5000);
+//								} catch (InterruptedException e1) {
+//									e1.printStackTrace();
+//								}
 					    	}
-				    	}
+				    	//}
 				    	
 				    	System.out.println(serverN + "," + 80 + "," + result);
 				    	
