@@ -26,7 +26,7 @@ public class TCPConnectTest {
 		System.setProperty("http.agent", "");
 		
 		int cores = Runtime.getRuntime().availableProcessors()-1;
-		cores = 2000;
+		cores = 20;
 		ThreadPoolExecutor es = (ThreadPoolExecutor) Executors.newFixedThreadPool(cores);
 		final String block = "forblocking";
 		try(BufferedReader br = new BufferedReader(new FileReader(inputfile))) {
