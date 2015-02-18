@@ -37,8 +37,10 @@ public class TCPConnectTest {
 						
 						
 						String serverN = linef;
-						
-						serverN = serverN.substring(0, serverN.indexOf(','));
+						try{
+							//if there is a ,
+							serverN = serverN.substring(0, serverN.indexOf(','));
+						}catch(StringIndexOutOfBoundsException e){}
 						serverN = serverN.replaceAll("http://", "");
 						serverN = serverN.replaceAll("https://", "");
 						serverN = serverN.replaceAll("ftp://", "");
