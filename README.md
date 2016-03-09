@@ -15,5 +15,6 @@ namecheap.com,80,Success
 porntube.com,80,UnknownHostException   <-- content blocked by DNS
 makeuseof.com,80,Success
 infolinks.com,80,Success
+mit.edu,80,SocketTimeoutException   <-- content blocked by IP
 ...
 ```
